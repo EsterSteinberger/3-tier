@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  todo-api:
+    build:
+      context: ./todo-api
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8080
+    restart: unless-stopped
+    networks:
+      - todo-network
+
+  todo-frontend:
+    build:
+      context: ./todo-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - todo-api
+    restart: unless-stopped
+    networks:
+      - todo-network
+
+networks:
+  todo-network:
+    driver: bridge 
