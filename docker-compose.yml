@@ -11,7 +11,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
-      - todo-network
+      - db-network
 
   todo-api:
     build:
@@ -28,6 +28,7 @@ services:
       - postgres
     restart: unless-stopped
     networks:
+      - db-network
       - todo-network
 
   todo-frontend:
@@ -44,6 +45,8 @@ services:
 
 networks:
   todo-network:
+    driver: bridge
+  db-network:
     driver: bridge
 
 volumes:
