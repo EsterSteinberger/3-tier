@@ -71,17 +71,21 @@ const TodoList = () => {
     <div className="todo-list">
       <h1>TODO List</h1>
       <TodoForm addTodo={addTodo} />
-      {todos.length === 0 ? (
-        <p className="empty-list">No todos yet. Add one above!</p>
+      {todos ? (
+        todos.length === 0 ? (
+          <p className="empty-list">No todos yet. Add one above!</p>
+        ) : (
+          todos.map((todo) => (
+            todo && <TodoItem
+              key={todo.id}
+              todo={todo}
+              toggleTodo={toggleTodo}
+              deleteTodo={deleteTodo}
+            />
+          ))
+        )
       ) : (
-        todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            toggleTodo={toggleTodo}
-            deleteTodo={deleteTodo}
-          />
-        ))
+        <p>Loading todos...</p>
       )}
     </div>
   );

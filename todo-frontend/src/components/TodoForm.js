@@ -5,9 +5,10 @@ const TodoForm = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
-    addTodo(title);
-    setTitle('');
+    if (title.trim()) {
+      addTodo(title);
+      setTitle('');
+    }
   };
 
   return (
@@ -17,8 +18,9 @@ const TodoForm = ({ addTodo }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add a new todo..."
+        className="todo-input"
       />
-      <button type="submit">Add</button>
+      <button type="submit" className="todo-button">Add</button>
     </form>
   );
 };

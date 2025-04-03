@@ -4,9 +4,15 @@ const API_BASE_URL = API_CONFIG.BASE_URL;
 
 export const TodoService = {
   getAllTodos: async () => {
-    const response = await fetch(`${API_BASE_URL}/todos`);
-    if (!response.ok) throw new Error('Failed to fetch todos');
-    return response.json();
+    try {
+      const response = await fetch(`${API_BASE_URL}/todos`);
+      if (!response.ok) throw new Error('Failed to fetch todos');
+      const data = await response.json();
+      return data || []; // Return empty array if data is null
+    } catch (error) {
+      console.error('Error fetching todos:', error);
+      return []; // Return empty array on error
+    }
   },
   
   createTodo: async (title) => {
