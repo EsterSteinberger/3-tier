@@ -28,11 +28,3 @@ docker-build:
 # Run Docker container
 docker-run: docker-build
 	docker run -p 8080:8080 todo-api
-
-# Run with Docker Compose
-docker-compose-up:
-	docker-compose up -d
-
-# Stop Docker Compose
-docker-compose-down:
-	docker-compose down 
